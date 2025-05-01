@@ -1,0 +1,183 @@
+/**
+ * Minimal Oxocarbon Dark theme for SwayNC
+ * Based on IBM Oxocarbon by shaunsingh
+ */
+
+/* Main container */
+.notification-center {
+  background: #161616;
+  color: #f2f4f8;
+  border: 1px solid #393939;
+  border-radius: 6px;
+  margin: 6px;
+}
+
+.notification-center-mainbox {
+  background: transparent;
+  padding: 4px;
+}
+
+/* Header with clear all button */
+.notification-center-header {
+  background: transparent;
+  color: #f2f4f8;
+  padding: 2px;
+}
+
+.notification-center-clear-all-button {
+  background: #393939;
+  color: #f2f4f8;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+.notification-center-clear-all-button:hover {
+  background: #08bdba;
+  color: #161616;
+}
+
+/* Individual notification */
+.notification {
+  background: #262626;
+  opacity: 0.90;
+  border-radius: 5px;
+  margin: 3px 5px;
+  padding: 5px;
+  border: 1px solid #393939;
+}
+
+.notification:hover {
+  background: #323232;
+  border: 1px solid #525252;
+  opacity: 1.0;
+}
+
+.notification-content {
+  background: transparent;
+  padding: 2px;
+}
+
+.notification-default-action {
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.notification-default-action:hover {
+  background: rgba(8, 189, 186, 0.15);
+}
+
+.notification-action {
+  border-radius: 4px;
+  margin: 0 2px;
+  padding: 2px 5px;
+  background: #393939;
+  color: #f2f4f8;
+}
+
+.notification-action:hover {
+  background: #08bdba;
+  color: #161616;
+}
+
+/* Close button */
+.close-button {
+  background: #ee5396;
+  color: #161616;
+  border-radius: 50%;
+  margin: 5px;  /* Increased from 1px */
+  padding: 0px;
+  /* Size reduction */
+  min-width: 14px;
+  min-height: 14px;
+  /* Remove negative margins that pushed it to the edge */
+  /* margin-top: -1px; */
+  /* margin-right: -1px; */
+  font-size: 12px;
+}
+
+.close-button:hover {
+  background: #ff7eb6;
+}
+
+/* Summary/Title */
+.summary {
+  font-weight: bold;
+  color: #3ddbd9;
+  margin-bottom: 2px;
+}
+
+/* Body */
+.body {
+  color: #f2f4f8;
+  margin: 0;
+}
+
+/* Timestamp */
+.time {
+  color: #dde1e6;
+  margin-top: 2px;
+}
+
+/* DND toggle */
+.dnd-button {
+  background: #262626;
+  color: #f2f4f8;
+  border-radius: 4px;
+  padding: 2px 5px;
+}
+
+.dnd-button:hover {
+  background: #393939;
+}
+
+.dnd-button.active {
+  background: #42be65;
+  color: #161616;
+}
+
+/* Control panel */
+.widget-buttons-grid {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.widget-button {
+  background: #393939;
+  border-radius: 4px;
+  padding: 4px;
+  color: #f2f4f8;
+  margin: 2px;
+}
+
+.widget-button:hover {
+  background: #08bdba;
+  color: #161616;
+}
+
+.widget-button.active {
+  background: #78a9ff;
+  color: #161616;
+}
+
+/* Scrollbar */
+scrollbar {
+  background-color: transparent;
+  border-radius: 4px;
+}
+
+scrollbar slider {
+  background-color: #393939;
+  border-radius: 4px;
+}
+
+scrollbar slider:hover {
+  background-color: #08bdba;
+}
+
+/* Ensure font consistency */
+* {
+  font-family: "MonoLisa Variable", monospace;
+  font-size: 14px;
+}
+

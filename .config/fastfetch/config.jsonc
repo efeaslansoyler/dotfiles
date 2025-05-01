@@ -1,0 +1,78 @@
+// ~/.config/fastfetch/config.jsonc
+// See https://github.com/fastfetch-cli/fastfetch/wiki/Configuration for more details
+// See *.jsonc in https://github.com/fastfetch-cli/fastfetch/tree/dev/presets/examples for more examples
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "source": "~/.config/fastfetch/arch",
+    "type": "file",
+    "padding": {
+      "top": 3
+    }
+  },
+  "display": {
+    "separator": "    "
+  },
+  "modules": [
+    {
+      "type": "custom",
+      "format": "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+    },
+    "break",
+    {
+      "type": "os",
+      "key": "  "
+    },
+    {
+      "type": "kernel",
+      "key": "  "
+    },
+    {
+      "type": "packages",
+      "key": "  󰮯"
+    },
+    {
+      "type": "wm",
+      "key": "  󰨇"
+    },
+    {
+      "type": "terminal",
+      "key": "  "
+    },
+    {
+      "type": "shell",
+      "key": "  "
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
+    },
+    "break",
+    {
+      "type": "host",
+      "key": "  "
+    },
+    {
+      "type": "cpu",
+      "key": "  "
+    },
+    {
+      "type": "gpu",
+      "key": "  󱤓"
+    },
+    {
+      "type": "memory",
+      "key": "  󰍛"
+    },
+    {
+      "type": "disk",
+      "key": "  "
+    },
+    "break",
+    {
+      "type": "custom",
+      "format": "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"
+    }
+  ]
+}
