@@ -157,7 +157,7 @@ fi
 info "Enabling fstrim.timer (SSD TRIM support)..."
 sudo systemctl enable --now fstrim.timer
 
-info "Enabling SSH daemon..."
+info "Enabling and starting services..."
 sudo systemctl enable --now sshd
 systemctl --user enable waybar
 systemctl --user enable hyprpaper
