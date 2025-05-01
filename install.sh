@@ -159,6 +159,11 @@ sudo systemctl enable --now fstrim.timer
 
 info "Enabling SSH daemon..."
 sudo systemctl enable --now sshd
+systemctl --user enable waybar
+systemctl --user enable hyprpaper
+systemctl --user enable hypridle
+systemctl --user enable hyprpolkitagent
+systemctl --user enable swaync
 
 # Install and enable UFW firewall
 info "Installing and enabling UFW firewall..."
