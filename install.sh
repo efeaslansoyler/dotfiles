@@ -101,6 +101,7 @@ categories=(
   app_pkgs
   audio_pkgs
   util_pkgs
+  virt_pkgs
 )
 
 info "Installing remaining packages..."
@@ -158,7 +159,11 @@ info "Enabling fstrim.timer (SSD TRIM support)..."
 sudo systemctl enable --now fstrim.timer
 
 info "Enabling and starting services..."
+# System Services
 sudo systemctl enable --now sshd
+sudo systemctl enable libvirtd.service
+sudo systemctl enable --now tuned.service
+# User Services
 systemctl --user enable waybar
 systemctl --user enable hyprpaper
 systemctl --user enable hypridle
@@ -172,6 +177,51 @@ sudo systemctl enable --now ufw
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
+
+# Download virtio-win ISO for Windows VMs
+VIRTIO_DIR="/usr/share/virtio-win"
+VIRTIO_ISO_URL="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win.iso"
+VIRTIO_ISO_PATH="$VIRTIO_DIR/virtio-win.iso"
+
+info "Preparing to download virtio-win ISO for Windows VMs..."
+
+# Create the directory if it doesn't exist
+sudo mkdir -p "$VIRTIO_DIR"
+
+# Download the ISO if not already present
+if [ ! -f "$VIRTIO_ISO_PATH" ]; then
+  info "Downloading virtio-win ISO..."
+  sudo wget -O "$VIRTIO_ISO_PATH" "$VIRTIO_ISO_URL"
+  info "virtio-win ISO downloaded to $VIRTIO_ISO_PATH"
+else
+  info "virtio-win ISO already exists at $VIRTIO_ISO_PATH"
+fi
+
+# Enable nested virtualization for Intel CPUs (current session)
+info "Enabling nested virtualization for Intel CPUs..."
+sudo modprobe -r kvm_intel
+sudo modprobe kvm_intel nested=1
+
+# Make nested virtualization persistent across reboots
+info "Making nested virtualization persistent..."
+echo "options kvm_intel nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf
+
+# Set tuned profile for virtual host
+info "Setting tuned profile to 'virtual-host'..."
+sudo tuned-adm profile virtual-host
+
+# Add current user to libvirt group
+info "Adding $USER to libvirt group..."
+sudo usermod -aG libvirt "$USER"
+
+# Set ACLs for /var/lib/libvirt/images/ so $USER can access VM images
+info "Setting ACLs for /var/lib/libvirt/images/..."
+
+sudo setfacl -R -b /var/lib/libvirt/images/
+sudo setfacl -R -m "u:${USER}:rwX" /var/lib/libvirt/images/
+sudo setfacl -m "d:u:${USER}:rwx" /var/lib/libvirt/images/
+
+info "ACLs set for /var/lib/libvirt/images/."
 
 # Stow dotfiles
 if [ "$(basename "$PWD")" == "dotfiles" ]; then

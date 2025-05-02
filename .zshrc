@@ -83,3 +83,6 @@ fastfetch
 
 # Go Path
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+
+# LIBVIRT_DEFAULT_URI
+export LIBVIRT_DEFAULT_URI="qemu:///system"
