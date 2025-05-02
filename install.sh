@@ -214,6 +214,10 @@ sudo tuned-adm profile virtual-host
 info "Adding $USER to libvirt group..."
 sudo usermod -aG libvirt "$USER"
 
+# Autostart the default libvirt network
+info "Setting default libvirt network to autostart..."
+sudo virsh net-autostart default
+
 # Set ACLs for /var/lib/libvirt/images/ so $USER can access VM images
 info "Setting ACLs for /var/lib/libvirt/images/..."
 
