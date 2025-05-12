@@ -34,6 +34,28 @@ sudo pacman -Syy
 
 info "pacman.conf configured successfully."
 
+# Add Chaotic-AUR repository
+
+info "Importing Chaotic-AUR key..."
+sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key 3056513887B78AEB
+
+info "Installing Chaotic-AUR keyring and mirrorlist..."
+sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
+sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+
+# Add Chaotic-AUR repo to pacman.conf if not already present
+if ! grep -q "\[chaotic-aur\]" /etc/pacman.conf; then
+  info "Adding Chaotic-AUR repository to pacman.conf..."
+  echo -e "\n[chaotic-aur]\nInclude = /etc/pacman.d/chaotic-mirrorlist" | sudo tee -a /etc/pacman.conf
+else
+  info "Chaotic-AUR repository already present in pacman.conf."
+fi
+
+# Sync and update system
+info "Syncing and updating system with Chaotic-AUR enabled..."
+sudo pacman -Syu --noconfirm
+
 # Ensure reflector is installed
 if ! command -v reflector &>/dev/null; then
   info "Installing reflector for mirrorlist optimization..."

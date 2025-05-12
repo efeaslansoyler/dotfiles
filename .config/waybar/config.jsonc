@@ -31,12 +31,12 @@
 
 	"cpu": {
 		"interval": 3,
-		"format": "  {}%"
+		"format": " {}%"
 	},
 
 	"memory": {
 		"interval": 3,
-		"format": " {}%" 
+		"format": "󱩵 {}%" 
 	},
 
 	"tray": {
@@ -45,6 +45,6 @@
 	},
 
 	"clock": {
-		"format": " 󰥔 {:%H:%M}"
+		"format": "󰥔 {:%H:%M}"
 	}
 }
