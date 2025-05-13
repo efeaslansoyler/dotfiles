@@ -49,7 +49,7 @@ passwd efe
 
 # Enable NetworkManager
 info "Enabling NetworkManager..."
-systemctl enable --now NetworkManager
+systemctl enable NetworkManager
 
 # Clone dotfiles to /home/efe/dotfiles
 info "Cloning dotfiles into /home/efe/dotfiles..."
@@ -68,7 +68,7 @@ mkinitcpio -P
 
 # Enable fstrim.timer
 info "Enabling fstrim.timer for SSDs..."
-systemctl enable --now fstrim.timer
+systemctl enable fstrim.timer
 
 # Install and configure systemd-boot
 info "Installing systemd-boot..."
