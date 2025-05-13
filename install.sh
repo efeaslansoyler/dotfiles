@@ -61,9 +61,15 @@ sgdisk --new=3:0:0 \
 # Inform the kernel of partition table changes
 partprobe "$DISK"
 
-BOOT_PARTITION="${DISK}p1"
-SWAP_PARTITION="${DISK}p2"
-ROOT_PARTITION="${DISK}p3"
+# Detect whether to use the “p” separator
+if [[ "$DISK" =~ ^/dev/nvme ]]; then
+  PARTSEP="p"
+else
+  PARTSEP=""
+fi
+BOOT_PARTITION="${DISK}${PARTSEP}1"
+SWAP_PARTITION="${DISK}${PARTSEP}2"
+ROOT_PARTITION="${DISK}${PARTSEP}3"
 
 info "Partitions created:"
 lsblk "$DISK" -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT
