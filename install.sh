@@ -82,16 +82,16 @@ info "Refreshing pacman database with new mirrors..."
 sudo pacman -Syy
 
 # Ensure yay is installed
-if ! command -v yay &>/dev/null; then
-  info "yay not found, installing yay..."
+if ! command -v paru &>/dev/null; then
+  info "paru not found, installing paru..."
   sudo pacman -S --needed --noconfirm base-devel git
-  git clone https://aur.archlinux.org/yay.git /tmp/yay
-  cd /tmp/yay
+  git clone https://aur.archlinux.org/paru-git.git /tmp/paru-git
+  cd /tmp/paru-git
   makepkg -si --noconfirm
   cd -
-  rm -rf /tmp/yay
+  rm -rf /tmp/paru-git
 else
-  info "yay is already installed."
+  info "paru is already installed."
 fi
 
 # Install NVIDIA drivers

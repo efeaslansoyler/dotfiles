@@ -11,7 +11,7 @@ error() {
 
 # Check if a package is installed
 is_installed() {
-  yay -Q "$1" &>/dev/null
+  paru -Q "$1" &>/dev/null
 }
 
 # Install packages by category name
@@ -30,7 +30,7 @@ install_category() {
 
   if [ "${#to_install[@]}" -gt 0 ]; then
     info "Installing: ${to_install[*]}"
-    yay -S --needed --noconfirm "${to_install[@]}"
+    paru -S --needed --noconfirm "${to_install[@]}"
   else
     info "All packages in $category_name are already installed."
   fi
