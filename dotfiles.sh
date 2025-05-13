@@ -172,9 +172,9 @@ fi
 
 info "Enabling and starting services..."
 # System Services
-sudo systemctl enable --now sshd
+sudo systemctl enable sshd
 sudo systemctl enable libvirtd.service
-sudo systemctl enable --now tuned.service
+sudo systemctl enable tuned.service
 # User Services
 systemctl --user enable waybar
 systemctl --user enable hyprpaper
@@ -185,7 +185,7 @@ systemctl --user enable swaync
 # Install and enable UFW firewall
 info "Installing and enabling UFW firewall..."
 sudo pacman -S --needed --noconfirm ufw
-sudo systemctl enable --now ufw
+sudo systemctl enable ufw
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
