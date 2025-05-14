@@ -60,7 +60,7 @@ chown -R efe:efe /home/efe/dotfiles
 
 # Allow wheel group to use sudo
 info "Allowing wheel group to use sudo..."
-sed -i 's/^#\s*\(%wheel ALL=(ALL) ALL\)/\1/' /etc/sudoers
+EDITOR=vim visudo
 
 # Regenerate initramfs
 info "Regenerating initramfs..."

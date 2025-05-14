@@ -14,24 +14,4 @@ is_installed() {
   paru -Q "$1" &>/dev/null
 }
 
-# Install packages by category name
-install_category() {
-  local category_name="$1"
-  local -n pkgs="$category_name"
-  local to_install=()
 
-  for pkg in "${pkgs[@]}"; do
-    if ! is_installed "$pkg"; then
-      to_install+=("$pkg")
-    else
-      info "$pkg is already installed."
-    fi
-  done
-
-  if [ "${#to_install[@]}" -gt 0 ]; then
-    info "Installing: ${to_install[*]}"
-    paru -S --needed --noconfirm "${to_install[@]}"
-  else
-    info "All packages in $category_name are already installed."
-  fi
-}

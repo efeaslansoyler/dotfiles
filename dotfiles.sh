@@ -78,7 +78,7 @@ info "Mirrorlist updated."
 info "Refreshing pacman database with new mirrors..."
 sudo pacman -Syy
 
-# Ensure yay is installed
+# Ensure paru is installed
 if ! command -v paru &>/dev/null; then
   info "paru not found, installing paru..."
   sudo pacman -S --needed --noconfirm base-devel git
@@ -91,9 +91,41 @@ else
   info "paru is already installed."
 fi
 
-# Install NVIDIA drivers
-info "Installing NVIDIA drivers..."
-install_category nvidia_pkgs
+
+# Install remaining package categories
+packages=(
+	"${nvidia_pkgs[@]}"
+  	"${wm_pkgs[@]}"
+  	"${font_pkgs[@]}"
+  	"${app_pkgs[@]}"
+  	"${audio_pkgs[@]}"
+  	"${util_pkgs[@]}"
+  	"${virt_pkgs[@]}"
+)
+
+info "Installing packages..."
+to_install=()
+already_installed=()
+for pkg in "${packages[@]}"; do
+	if ! is_installed "$pkg"; then
+		to_install+=("$pkg")
+	else
+		already_installed+=("$pkg")
+	fi
+done
+
+if [ "${#already_installed[@]}" -qt 0 ]; then
+	info "These Packages are already installed: ${already_installed[*]}"
+fi
+
+if [ "${#to_install[@]}" -gt 0 ]; then
+	info "Installing all packages: ${to_install[*]}"
+	paru -S --needed --noconfirm "${to_install[@]}"
+else
+	info "All packages are already installed."
+fi
+
+info "All packages installed!"
 
 # Configure mkinitcpio.conf
 info "Configuring mkinitcpio.conf for NVIDIA..."
@@ -109,24 +141,6 @@ info "mkinitcpio.conf configured."
 # Regenerate initramfs
 info "Regenerating initramfs..."
 sudo mkinitcpio -P
-
-# Install remaining package categories
-categories=(
-  wm_pkgs
-  font_pkgs
-  app_pkgs
-  audio_pkgs
-  util_pkgs
-  virt_pkgs
-)
-
-info "Installing remaining packages..."
-# Gather all package arrays except nvidia_pkgs
-for category in "${categories[@]}"; do
-  install_category "$category"
-done
-
-info "All packages installed!"
 
 # Install Colloid GTK Theme
 COLLOID_GTK_DIR="/tmp/Colloid-gtk-theme"
@@ -173,8 +187,8 @@ fi
 info "Enabling and starting services..."
 # System Services
 sudo systemctl enable sshd
-sudo systemctl enable libvirtd.service
-sudo systemctl enable tuned.service
+sudo systemctl enable --now libvirtd.service
+sudo systemctl enable --now tuned.service
 # User Services
 systemctl --user enable waybar
 systemctl --user enable hyprpaper
@@ -242,6 +256,11 @@ info "ACLs set for /var/lib/libvirt/images/."
 # Stow dotfiles
 if [ "$(basename "$PWD")" == "dotfiles" ]; then
   info "Stowing dotfiles..."
+  if [ -f "$HOME/.zshrc" ]; then
+	  info "Removing existing ~/.zshrc..."
+	  rm "$HOME/.zshrc"
+  fi
+
   stow .
 else
   error "Please run this script from the 'dotfiles' directory."
