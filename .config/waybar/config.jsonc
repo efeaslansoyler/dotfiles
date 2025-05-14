@@ -24,19 +24,19 @@
 		"format": "{icon} {volume}%",
 		"scroll-step": 5,
 		"max-volume": 150,
-		"format-muted": " 0%",
-		"format-icons": ["", "", ""],
+		"format-muted": "  0%",
+		"format-icons": [" ", " ", " "],
 		"on-click": "pavucontrol"
 	},
 
 	"cpu": {
 		"interval": 3,
-		"format": " {}%"
+		"format": "  {}%"
 	},
 
 	"memory": {
 		"interval": 3,
-		"format": " {}%" 
+		"format": "  {}%" 
 	},
 
 	"tray": {

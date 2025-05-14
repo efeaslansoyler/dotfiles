@@ -1,10 +1,10 @@
-app_launch_prefix = ""
+app_launch_prefix = "uwsm app -- "
 terminal_title_flag = ""
 locale = ""
 close_when_open = false
 theme = "custom"
 monitor = ""
-hotreload_theme = false
+hotreload_theme = true
 as_window = false
 timeout = 0
 disable_click_to_close = false
@@ -259,12 +259,12 @@ show_icon_when_single = true
 switcher_only = true
 
 [[plugins.entries]]
-exec = "shutdown now"
+exec = "systemctl poweroff"
 icon = "system-shutdown"
 label = "Shutdown"
 
 [[plugins.entries]]
-exec = "reboot"
+exec = "systemctl reboot"
 icon = "system-reboot"
 label = "Reboot"
 

@@ -1,7 +1,7 @@
 /* AUTO GENERATED. DO NOT EDIT. CHANGES WILL BE OVERWRITTEN. */
 
 @define-color foreground #f2f4f8;
-@define-color background rgba(22, 22, 22, 0.8);
+@define-color background rgba(22, 22, 22, 0.9);
 @define-color color1 #ff7eb6;
 /* AUTO GENERATED. DO NOT EDIT. CHANGES WILL BE OVERWRITTEN. */
 
@@ -47,6 +47,7 @@ slider,
   box-shadow:
     0 19px 38px rgba(0, 0, 0, 0.3),
     0 15px 12px rgba(0, 0, 0, 0.22);
+  margin-top: 300px;
 }
 
 #search {
