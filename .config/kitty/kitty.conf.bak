@@ -1,0 +1,9 @@
+include oxocarbon.conf
+
+font_family      MonoLisa Variable
+
+cursor_blink_interval 0
+confirm_os_window_close 0
+enable_audio_bell no
+
+map ctrl+l send_text normal,application c \r

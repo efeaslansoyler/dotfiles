@@ -48,7 +48,7 @@ configuration {
     blue-accent:                 #33b1ffe6;
     pink-accent:                 #ee5396e6;
 
-    font: "MonoLisa Variable 10";
+    font: "MonoLisaVariable Nerd Font 10";
 }
 
 

@@ -36,7 +36,7 @@
 
 	"memory": {
 		"interval": 3,
-		"format": "󱩵 {}%" 
+		"format": " {}%" 
 	},
 
 	"tray": {
