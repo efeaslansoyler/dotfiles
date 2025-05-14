@@ -1,5 +1,8 @@
-
 [Default Applications]
 x-scheme-handler/discord=vesktop.desktop
 inode/directory=org.gnome.Nautilus.desktop
 application/x-gnome-saved-search=nautilus.desktop
+video/mp4=mpv.desktop
+
+[Added Associations]
+video/mp4=mpv.desktop;
