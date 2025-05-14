@@ -273,4 +273,23 @@ else
   exit 1
 fi
 
+# Create workspace directory
+info "Creating workspace directory..."
+mkdir -p "$HOME/workspace/github.com/efeaslansoyler/"
+info "Workspace directory created at $HOME/workspace/github.com/efeaslansoyler/"
+
+# Zen browser betterfox user.js
+ZEN_PROFILE_DIR="$HOME/.zen"
+USER_JS_SOURCE="$HOME/dotfiles/.config/zen/user.js"
+
+# Find the default profile directory
+RELEASE_PROFILE_DIR=$(find "$ZEN_PROFILE_DIR" -maxdepth 1 -type d -name "*release*")
+
+if [ -d "$RELEASE_PROFILE_DIR" ]; then
+  info "Copying user.js to Zen browser profile..."
+  ln -sf "$USER_JS_SOURCE" "$RELEASE_PROFILE_DIR/user.js"
+else
+  error "Zen browser profile directory not found."
+fi
+
 info "Setup complete! Please reboot your system to apply all changes."

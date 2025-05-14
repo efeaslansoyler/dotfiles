@@ -27,3 +27,4 @@ _darcs
 ^post-install.sh$
 ^packages\.conf$
 ^utils\.sh$
+.config/zen
