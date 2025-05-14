@@ -91,38 +91,37 @@ else
   info "paru is already installed."
 fi
 
-
 # Install remaining package categories
 packages=(
-	"${nvidia_pkgs[@]}"
-  	"${wm_pkgs[@]}"
-  	"${font_pkgs[@]}"
-  	"${app_pkgs[@]}"
-  	"${audio_pkgs[@]}"
-  	"${util_pkgs[@]}"
-  	"${virt_pkgs[@]}"
+  "${nvidia_pkgs[@]}"
+  "${wm_pkgs[@]}"
+  "${font_pkgs[@]}"
+  "${app_pkgs[@]}"
+  "${audio_pkgs[@]}"
+  "${util_pkgs[@]}"
+  "${virt_pkgs[@]}"
 )
 
 info "Installing packages..."
 to_install=()
 already_installed=()
 for pkg in "${packages[@]}"; do
-	if ! is_installed "$pkg"; then
-		to_install+=("$pkg")
-	else
-		already_installed+=("$pkg")
-	fi
+  if ! is_installed "$pkg"; then
+    to_install+=("$pkg")
+  else
+    already_installed+=("$pkg")
+  fi
 done
 
 if [ "${#already_installed[@]}" -qt 0 ]; then
-	info "These Packages are already installed: ${already_installed[*]}"
+  info "These Packages are already installed: ${already_installed[*]}"
 fi
 
 if [ "${#to_install[@]}" -gt 0 ]; then
-	info "Installing all packages: ${to_install[*]}"
-	paru -S --needed --noconfirm "${to_install[@]}"
+  info "Installing all packages: ${to_install[*]}"
+  paru -S --needed --noconfirm "${to_install[@]}"
 else
-	info "All packages are already installed."
+  info "All packages are already installed."
 fi
 
 info "All packages installed!"
@@ -186,10 +185,13 @@ fi
 
 info "Enabling and starting services..."
 # System Services
+info "Enabling and starting system services..."
 sudo systemctl enable sshd
+sudo systemctl enable power-profiles-daemon
 sudo systemctl enable --now libvirtd.service
 sudo systemctl enable --now tuned.service
 # User Services
+info "Enabling and starting user services..."
 systemctl --user enable waybar
 systemctl --user enable hyprpaper
 systemctl --user enable hypridle
@@ -203,6 +205,10 @@ sudo systemctl enable ufw
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
+
+# Set power profile to 'performance'
+info "Setting power profile to 'performance'..."
+powerprofilesctl set performance
 
 # Download virtio-win ISO for Windows VMs
 VIRTIO_DIR="/usr/share/virtio-win"
@@ -257,8 +263,8 @@ info "ACLs set for /var/lib/libvirt/images/."
 if [ "$(basename "$PWD")" == "dotfiles" ]; then
   info "Stowing dotfiles..."
   if [ -f "$HOME/.zshrc" ]; then
-	  info "Removing existing ~/.zshrc..."
-	  rm "$HOME/.zshrc"
+    info "Removing existing ~/.zshrc..."
+    rm "$HOME/.zshrc"
   fi
 
   stow .

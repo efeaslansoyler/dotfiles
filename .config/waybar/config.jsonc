@@ -31,7 +31,7 @@
 
 	"cpu": {
 		"interval": 3,
-		"format": "  {}%"
+		"format": "  {}%",
 	},
 
 	"memory": {
