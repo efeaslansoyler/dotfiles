@@ -23,5 +23,7 @@ _darcs
 ^/COPYING
 
 ^install\.sh$
+^dotfiles.sh$
+^post-install.sh$
 ^packages\.conf$
 ^utils\.sh$
