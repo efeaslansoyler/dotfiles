@@ -251,7 +251,7 @@ switcher_only = true
 provider = "googlefree"
 
 [[plugins]]
-keep_sort = false
+keep_sort = true
 name = "power"
 placeholder = "Power"
 recalculate_score = true
