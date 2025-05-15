@@ -240,6 +240,7 @@ echo "options kvm_intel nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf
 
 # Set tuned profile for virtual host
 info "Setting tuned profile to 'virtual-host'..."
+sudo systemctl restart tuned
 sudo tuned-adm profile virtual-host
 
 # Add current user to libvirt group
@@ -277,26 +278,5 @@ fi
 info "Creating workspace directory..."
 mkdir -p "$HOME/workspace/github.com/efeaslansoyler/"
 info "Workspace directory created at $HOME/workspace/github.com/efeaslansoyler/"
-
-# Zen browser betterfox user.js
-ZEN_PROFILE_DIR="$HOME/.zen"
-USER_JS_SOURCE="$HOME/dotfiles/.config/zen/user.js"
-
-# Launch zen browser to create the profile directory
-info "Launching Zen browser to create profile directory..."
-zen-browser &
-sleep 5 # Wait for the browser to create the profile directory
-
-# Find the default profile directory
-RELEASE_PROFILE_DIR=$(find "$ZEN_PROFILE_DIR" -maxdepth 1 -type d -name "*release*")
-
-if [ -d "$RELEASE_PROFILE_DIR" ]; then
-  info "Copying user.js to Zen browser profile..."
-  ln -sf "$USER_JS_SOURCE" "$RELEASE_PROFILE_DIR/user.js"
-else
-  error "Zen browser profile directory not found."
-fi
-
-info "user.js copied to Zen browser profile."
 
 info "Setup complete! Please reboot your system to apply all changes."
