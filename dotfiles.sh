@@ -212,7 +212,7 @@ powerprofilesctl set performance
 
 # Download virtio-win ISO for Windows VMs
 VIRTIO_DIR="/usr/share/virtio-win"
-VIRTIO_ISO_URL="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.271-1/virtio-win.iso"
+VIRTIO_ISO_URL="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win.iso"
 VIRTIO_ISO_PATH="$VIRTIO_DIR/virtio-win.iso"
 
 info "Preparing to download virtio-win ISO for Windows VMs..."
@@ -259,6 +259,13 @@ sudo setfacl -R -m "u:${USER}:rwX" /var/lib/libvirt/images/
 sudo setfacl -m "d:u:${USER}:rwx" /var/lib/libvirt/images/
 
 info "ACLs set for /var/lib/libvirt/images/."
+
+# Set firewall rules for libvirt
+info "Setting firewall rules for libvirt..."
+
+sudo sed -i 's/^#firewall_backend = "nftables"$/firewall_backend = "iptables"/' /etc/libvirt/network.conf
+
+info "Firewall rules set for libvirt."
 
 # Stow dotfiles
 if [ "$(basename "$PWD")" == "dotfiles" ]; then
