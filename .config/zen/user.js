@@ -214,7 +214,8 @@ user_pref("browser.search.suggest.enabled", true);
 user_pref("dom.security.https_only_mode", true);
 user_pref("dom.security.https_only_mode_error_page_user_suggestions", true);
 user_pref("network.trr.uri", "https://all.dns.mullvad.net/dns-query");
-user_pref("network.trr.mode", 3);
+user_pref("network.trr.mode", 2);
+user_pref("network.trr.max-fails", 5);
 
 
 /****************************************************************************
