@@ -1,0 +1,20 @@
+[Unit]
+Description=Udiskie Automounter
+Documentation=man:udiskie(1)
+# Start after the main graphical session targets are up
+# This usually ensures D-Bus and other necessary session services are available
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+# Find the full path to udiskie on your system by running: which udiskie
+# Common paths are /usr/bin/udiskie or /usr/local/bin/udiskie
+# Replace /usr/bin/udiskie below if yours is different.
+ExecStart=/usr/bin/udiskie -ant
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=graphical-session.target
+
