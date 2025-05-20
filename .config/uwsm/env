@@ -1,0 +1,22 @@
+export GDK_BACKEND=wayland,x11,*
+export SDL_VIDEODRIVER=wayland
+export CLUTTER_BACKEND=wayland
+
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export QT_QPA_PLATFORMTHEME=qt6ct
+export QT_QPA_PLATFORM=wayland;xcb
+
+export GBM_BACKEND=nvidia-drm
+export __GL_VENDOR_LIBRARY_NAME=nvidia
+export LIBVA_DRIVER_NAME=nvidia
+export __GL_GSYNC_ALLOWED=1
+export __GL_VRR_ALLOWED=0
+export ELECTRON_OZONE_PLATFORM_HINT=auto
+export NVD_BACKEND=direct
+
+export GTK_THEME=Colloid-Dark
+export XCURSOR_THEME=Banana
+export XCURSOR_SIZE=32
+export HYPRCURSOR_THEME=Banana
+export HYPRCURSOR_SIZE=32
