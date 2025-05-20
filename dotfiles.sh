@@ -151,7 +151,7 @@ else
 fi
 
 info "Installing Colloid GTK theme with your options..."
-bash "$COLLOID_GTK_DIR/install.sh" -t pink -c dark -l --tweaks black
+bash "$COLLOID_GTK_DIR/install.sh" -t all -c dark -l --tweaks black
 
 # Install Colloid Icon Theme
 COLLOID_ICON_DIR="/tmp/Colloid-icon-theme"
@@ -163,7 +163,7 @@ else
 fi
 
 info "Installing Colloid icon theme with your options..."
-bash "$COLLOID_ICON_DIR/install.sh" -t pink
+bash "$COLLOID_ICON_DIR/install.sh" -t all
 
 # Clean up
 rm -rf "$COLLOID_GTK_DIR" "$COLLOID_ICON_DIR"
@@ -268,18 +268,18 @@ sudo sed -i 's/^#firewall_backend = "nftables"$/firewall_backend = "iptables"/' 
 info "Firewall rules set for libvirt."
 
 # Stow dotfiles
-if [ "$(basename "$PWD")" == "dotfiles" ]; then
-  info "Stowing dotfiles..."
-  if [ -f "$HOME/.zshrc" ]; then
-    info "Removing existing ~/.zshrc..."
-    rm "$HOME/.zshrc"
-  fi
-
-  stow .
-else
-  error "Please run this script from the 'dotfiles' directory."
-  exit 1
-fi
+# if [ "$(basename "$PWD")" == "dotfiles" ]; then
+#   info "Stowing dotfiles..."
+#   if [ -f "$HOME/.zshrc" ]; then
+#     info "Removing existing ~/.zshrc..."
+#     rm "$HOME/.zshrc"
+#   fi
+#
+#   stow .
+# else
+#   error "Please run this script from the 'dotfiles' directory."
+#   exit 1
+# fi
 
 # Create workspace directory
 info "Creating workspace directory..."

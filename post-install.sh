@@ -52,11 +52,11 @@ info "Enabling NetworkManager..."
 systemctl enable NetworkManager
 
 # Clone dotfiles to /home/efe/dotfiles
-# info "Cloning dotfiles into /home/efe/dotfiles..."
-# runuser -l efe -c "git clone https://github.com/efeaslansoyler/dotfiles.git ~/dotfiles"
+info "Cloning dotfiles into /home/efe/dotfiles..."
+runuser -l efe -c "git clone https://github.com/efeaslansoyler/dotfiles.git ~/dotfiles"
 
 # Fix ownership of dotfiles
-# chown -R efe:efe /home/efe/dotfiles
+chown -R efe:efe /home/efe/dotfiles
 
 # Allow wheel group to use sudo
 info "Allowing wheel group to use sudo..."
