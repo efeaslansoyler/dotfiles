@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Source utils.sh for info()/error()
-source /root/arch-setup/utils.sh
+source ./utils.sh
 
 # Set the timezone
 info "Setting timezone to Europe/Istanbul..."

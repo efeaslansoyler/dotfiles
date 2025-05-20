@@ -123,16 +123,26 @@ info "fstab generated at /mnt/etc/fstab"
 
 info "Base system installed successfully."
 
-cat <<EOF
+info "Chrooting into the new system..."
 
-Next Steps:
-  1) Enter the new system:
-     arch-chroot /mnt /bin/bash
+# Create a temporary directory for the chroot environment
+TEMP_DIR="/mnt/install_temp"
+info "Creating temporary directory at $TEMP_DIR..."
+mkdir -p "${TEMP_DIR}"
 
-  2) Inside the chroot, clone the dotfiles repository:
-     git clone https://github.com/efeaslansoyler/dotfiles.git /root/arch-setup
+# Copy the script to the temporary directory
+info "Copying script to temporary directory..."
+cp ./post-install.sh "${TEMP_DIR}/post-install.sh"
+cp ./utils.sh "${TEMP_DIR}/utils.sh"
+chmod +x "${TEMP_DIR}/post-install.sh"
 
-  3) Run the post-installation script:
-     chmod +x /root/arch-setup/post-install.sh
-     /root/arch-setup/post-install.sh
-EOF
+info "Chrooting into the new system..."
+arch-chroot /mnt /bin/bash -c "${TEMP_DIR}/post-install.sh"
+info "Chrooted into the new system. Post-installation script executed."
+
+# Clean up
+info "Cleaning up temporary directory..."
+rm -rf "${TEMP_DIR}"
+
+# Finalize
+info "Installation completed. You can now reboot into your new Arch Linux system."

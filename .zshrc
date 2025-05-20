@@ -84,5 +84,8 @@ fastfetch
 # Go Path
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
+# Default Editor
+export EDITOR="nvim"
+
 # LIBVIRT_DEFAULT_URI
 export LIBVIRT_DEFAULT_URI="qemu:///system"
