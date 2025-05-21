@@ -1,0 +1,19 @@
+[Unit]
+Description=SWWW Wallpaper Daemon
+Documentation=man:swww(1) https://github.com/Horus645/swww
+# This service is part of the graphical session.
+PartOf=graphical-session.target
+# It should start after the graphical session is ready.
+After=graphical-session.target
+
+[Service]
+Type=simple
+# Replace this with the actual path to swww-daemon found with 'which swww-daemon'
+ExecStart=/usr/bin/swww-daemon
+ExecStartPost=/bin/sh -c "sleep 0.5 && /usr/bin/swww img --transition-type grow --transition-pos top-right --transition-step 90 .config/hypr/wallpapers/wallpaper1.jpg"
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=graphical-session.target
+

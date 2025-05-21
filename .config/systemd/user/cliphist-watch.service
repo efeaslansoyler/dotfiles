@@ -1,0 +1,23 @@
+[Unit]
+Description=Clipboard history manager (wl-paste to cliphist)
+Documentation=man:wl-paste(1) man:cliphist(1)
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=simple
+# Ensure wl-paste and cliphist are in your PATH or provide full paths.
+# Example with full paths (adjust if yours are different):
+# ExecStart=/usr/bin/wl-paste --watch /usr/bin/cliphist store
+ExecStart=/usr/bin/wl-paste --watch cliphist store
+Restart=on-failure
+RestartSec=5s
+# The WAYLAND_DISPLAY environment variable should be automatically
+# available to user services started as part of the graphical session.
+# If you encounter issues, you might need to explicitly import it,
+# though this is usually handled by systemd's user session setup.
+# Environment="WAYLAND_DISPLAY=%E{WAYLAND_DISPLAY}"
+
+[Install]
+WantedBy=graphical-session.target
+
