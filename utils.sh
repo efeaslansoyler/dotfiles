@@ -11,7 +11,7 @@ error() {
 
 # Check if a package is installed
 is_installed() {
-  paru -Q "$1" &>/dev/null
+  yay -Q "$1" &>/dev/null
 }
 
 

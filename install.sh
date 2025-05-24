@@ -104,6 +104,47 @@ mount --mkdir "$BOOT_PARTITION" /mnt/boot
 info "Mounting SWAP Partition ($SWAP_PARTITION)..."
 swapon "$SWAP_PARTITION"
 
+# Ask about additional disk mounting
+echo
+info "Do you want to mount an additional disk (e.g., for games/VMs)?"
+read -p "Mount additional disk? (y/N): " MOUNT_ADDITIONAL
+
+if [[ "$MOUNT_ADDITIONAL" =~ ^[Yy]$ ]]; then
+  info "Listing available disks (excluding installation disk)..."
+  lsblk -d -o NAME,SIZE,MODEL,FSTYPE | grep -v "$(basename "$DISK")"
+  
+  echo
+  read -p "Enter the additional disk/partition to mount (e.g., /dev/sdb1): " ADDITIONAL_DISK
+  
+  # Validate additional disk selection
+  if [[ ! -b "$ADDITIONAL_DISK" ]]; then
+    error "Invalid disk/partition selected: $ADDITIONAL_DISK"
+    error "Continuing without mounting additional disk..."
+  else
+    # Get UUID of the additional disk
+    ADDITIONAL_UUID=$(blkid -s UUID -o value "$ADDITIONAL_DISK")
+    
+    if [[ -z "$ADDITIONAL_UUID" ]]; then
+      error "Could not get UUID for $ADDITIONAL_DISK"
+      error "Continuing without mounting additional disk..."
+    else
+      info "UUID of additional disk: $ADDITIONAL_UUID"
+      
+      # Create mount directory
+      ADDITIONAL_MOUNT_POINT="/mnt/run/media/efe/$ADDITIONAL_UUID"
+      info "Creating mount directory: $ADDITIONAL_MOUNT_POINT"
+      mkdir -p "$ADDITIONAL_MOUNT_POINT"
+      
+      # Mount the additional disk
+      info "Mounting $ADDITIONAL_DISK to $ADDITIONAL_MOUNT_POINT..."
+      mount "$ADDITIONAL_DISK" "$ADDITIONAL_MOUNT_POINT"
+      
+      info "Additional disk mounted successfully!"
+      info "It will be available at /run/media/efe/$ADDITIONAL_UUID after installation"
+    fi
+  fi
+fi
+
 # Install base system
 info "Installing base system..."
 pacstrap -K /mnt \
