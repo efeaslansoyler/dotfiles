@@ -15,7 +15,7 @@ export __GL_VRR_ALLOWED=0
 export ELECTRON_OZONE_PLATFORM_HINT=auto
 export NVD_BACKEND=direct
 
-export GTK_THEME=Colloid-Dark
+export GTK_THEME=adw-gtk3-dark
 export XCURSOR_THEME=Banana
 export XCURSOR_SIZE=32
 export HYPRCURSOR_THEME=Banana

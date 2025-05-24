@@ -10,7 +10,7 @@ After=graphical-session.target
 Type=simple
 # Replace this with the actual path to swww-daemon found with 'which swww-daemon'
 ExecStart=/usr/bin/swww-daemon
-ExecStartPost=/bin/sh -c "sleep 0.5 && /usr/bin/swww img --transition-type grow --transition-pos top-right --transition-step 90 .config/hypr/wallpapers/wallpaper1.jpg"
+#ExecStartPost=/bin/sh -c "sleep 0.5 && /usr/bin/swww img --transition-type grow --transition-pos top-right --transition-step 90 .config/hypr/wallpapers/wallpaper1.jpg"
 Restart=on-failure
 RestartSec=5s
 
